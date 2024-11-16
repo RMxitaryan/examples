@@ -1,45 +1,41 @@
 ﻿#include <iostream>
 
-int main()
-{
-    // Task1
-    /*int num;
-    std::cout << "Your number is ";
-    std::cin >> num;
-    std::cout << "The last digit is " << num % 10;*/
+int main() {
 
-    //Task2
-    /*int num1, num2;
-    std::cout << "First number is ";
-    std::cin >> num1;
-    std::cout << "Second number is ";
-    std::cin >> num2;
-    if (num1 + num2 > 20) {
-        std::cout << num1 * num2;
-    }
-    else if (num1 >= num2) {
-        std::cout << num1 / num2 << " mnacord " << num1 % num2;
-    }
-    else {
-        std::cout << num2 / num1 << " mnacord " << num2 % num1;
-    }*/
+	//6. Find Duplicate Elements: Write a program to identify and count duplicate elements in an array.
 
-    //Task3
-    /*double num1, num2, num3;
-    std::cout << "First number is ";
-    std::cin >> num1;
-    std::cout << "Second number is ";
-    std::cin >> num2;
-    std::cout << "Third number is ";
-    std::cin >> num3;
-    if ((num1 + num3) / 2 == num2) {
-        std::cout << "Common difference is " << num2 - num1;
-    }
-    else {
-        std::cout << "This numbers are not formed an arithmetical progression";
-    }*/
+	int const N = 10;
+	int arr[N];
+	for (int i = 0;i < N;i++) {
+		std::cin >> arr[i];
+	}
+	int dublicate[N / 2] = {0};
+	int ind = 0;
+	for (int i = 0;i < N;i++) {
+		bool exist = false;
+		for (int a = 0;a < N / 2;a++) {
+			if (dublicate[a] == arr[i]) {
+				exist = true;
+				break;
+			}
+		}
+		if (!exist) {
+          for (int j = i + 1;j < N;j++) {
+			  if (arr[j] == arr[i]) {
+				dublicate[ind] = arr[j];
+				ind++;
+				break;
+			  }
+		  }
+		}
+		
+	}
+	int count = 0;
+	for (int i = 0;i < ind;++i) {
+		count++;
+	}
+	std::cout << count;
 
-    return 0;
+	
+	return 0;
 }
-
-
