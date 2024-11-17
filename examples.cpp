@@ -9,13 +9,13 @@ int main() {
 	for (int i = 0;i < N;i++) {
 		std::cin >> arr[i];
 	}
-	int dublicate[N / 2] = {0};
+	int dublicate[N / 2];
 	int ind = 0;
 	for (int i = 0;i < N;i++) {
 		bool exist = false;
 		for (int a = 0;a < N / 2;a++) {
 			if (dublicate[a] == arr[i]) {
-				exist = true;
+				exist = true; 
 				break;
 			}
 		}
