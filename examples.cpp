@@ -1,33 +1,26 @@
 ﻿#include <iostream>
-#include <cmath>
 
 int main() {
-    const int N = 10;
-    int arr[N];
     int n;
-    std::cin >> n;
-
-    for (int i = 0;i < n;++i) {
-        std:: cin >> arr[i];
+   std:: cin >> n;
+    int* isPrime = new int[n + 1];
+    for (int i = 0; i <= n;++i) {
+        isPrime[i] = 1;
     }
-    int key;
-    std::cin >> key;
-    int left = 0, right = n - 1;
+    isPrime[0] = isPrime[1] = 0;
 
-    while (left <= right) {
-        int mid = (left + right)/ 2;
-
-        if (arr[mid] == key) {
-            std::cout << mid;
-            break;
-        }
-        else if (arr[mid] < key) {
-            left = mid + 1;
-        }
-        else {
-            right = mid - 1;
+    for (int p = 2; p * p <= n; p++) {
+        if (isPrime[p]) {
+            for (int i = p * p; i <= n; i += p) {
+                isPrime[i] = false;
+            }
         }
     }
-   
+    for (int i = 2; i <= n; i++) {
+        if (isPrime[i]) {
+            std::cout << i << " ";
+        }
+    }
+    delete[] isPrime;
     return 0;
 }
