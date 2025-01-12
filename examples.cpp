@@ -1,20 +1,39 @@
 ﻿#include <iostream>
 
-void hanoi(int n,char from = 'A',char to = 'C',char aux = 'B') {
-    if (n == 1) {
-        std::cout << n <<' '<< from << " -ic " << to << '\n';
-        return;
+bool simetrik(int num) {
+    int arr[10] = {};
+    int digitCount = 0;
+    while (num) {
+        digitCount++;
+        arr[num % 10]++;
+        num /= 10;
     }
-    hanoi(n - 1, from, aux, to);
-    std::cout << n <<' '<< from << " -ic "  << to << '\n';
-    hanoi(n - 1, aux,to, from);
+    int a = 0;
+    if (arr[0] == digitCount - 1) {
+        return false;
+    }
+    for (int i = 0;i < 10;++i) {
+        if (arr[i] % 2 == 1) {
+            ++a;
+        }
+    }
+    if (a <= 1) {
+        return true;
+    }
+    return false;
 }
 
 int main() {
-    int n;
-    std::cin >> n;
-    hanoi(n);
- 
-
+    int a, b;
+    std::cin >> a >> b;
+    int count = 0;
+    for (int i = a;i <= b;++i) {
+        if (simetrik(i)) {
+            ++count;
+        }
+    }
+    std::cout << count;
+    
+  
     return 0;
 }
