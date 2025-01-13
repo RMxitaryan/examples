@@ -1,36 +1,41 @@
 ﻿#include <iostream>
 #include <cmath>
-
+bool erjanik(int x);
 
 int main() {
-    int n;
-    std::cin >> n;
-    int* arr = new int[n];
-    int* arr2 = new int[n];
-    for (int i = 0;i < n;++i) {
-        std::cin >> arr[i];
-    }
-    for (int i = 0;i < n;++i) {
-        int nearest;
-        i != 0 ? nearest = arr[0] : nearest = arr[1];
-        for (int j = 0;j < n;++j) {
-            if (i == j) {
-                continue;
-            }
-            if(abs(arr[i] - arr[j]) < abs(arr[i] - nearest)) {
-                nearest = arr[j];
-            }
-            else if (abs(arr[i] - arr[j]) == abs(arr[i] - nearest)) {
-                if (arr[j] > nearest) {
-                    nearest = arr[j];
-                }
+    int a, b;
+    int count = 0;
+    std::cin >> a >> b;
+    for (int i = a; i <= b; i++) {
+        for (int j = 47; j <= i; j++) {
+            if (i % j == 0 && erjanik(j)) {
+                count++;
+                std::cout << i<<'\n';
+                break;
             }
         }
-        arr2[i] = nearest;
+    }std::cout << count;
+
+}
+bool erjanik(int x) {
+    bool existSeven = false;
+    bool existFour = false;
+    bool existAnother = false;
+    while (x > 0) {
+        int c = x % 10;
+        if (c == 7) {
+            existSeven = true;
+        }
+        else if (c == 4) {
+            existFour = true;
+        }
+        else {
+            existAnother = true;
+        }
+        x /= 10;
     }
-    for (int i = 0;i < n;++i) {
-        std::cout << arr2[i] <<'\n';
+    if (existSeven && existFour && !existAnother) {
+        return true;
     }
-    delete[] arr;
-    delete[] arr2;
+    return false;
 }
