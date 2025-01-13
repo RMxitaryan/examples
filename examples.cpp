@@ -1,41 +1,25 @@
 ﻿#include <iostream>
-#include <cmath>
-bool erjanik(int x);
 
 int main() {
-    int a, b;
-    int count = 0;
-    std::cin >> a >> b;
-    for (int i = a; i <= b; i++) {
-        for (int j = 47; j <= i; j++) {
-            if (i % j == 0 && erjanik(j)) {
-                count++;
-                std::cout << i<<'\n';
-                break;
+    int n;
+    std::cin >> n;
+    int* arr = new int[n];
+    for (int i = 0;i < n;++i) {
+        std::cin >> arr[i];
+    }
+    int maxCount = 1;
+    for (int i = 0;i < n - 1;++i) {
+        static int count = 1;
+        if (arr[i] == arr[i + 1]) {
+            count++;
+            if (count > maxCount) {
+                maxCount = count;
             }
         }
-    }std::cout << count;
-
-}
-bool erjanik(int x) {
-    bool existSeven = false;
-    bool existFour = false;
-    bool existAnother = false;
-    while (x > 0) {
-        int c = x % 10;
-        if (c == 7) {
-            existSeven = true;
-        }
-        else if (c == 4) {
-            existFour = true;
-        }
         else {
-            existAnother = true;
+                count = 1;
         }
-        x /= 10;
+        
     }
-    if (existSeven && existFour && !existAnother) {
-        return true;
-    }
-    return false;
+    std::cout << maxCount;
 }
