@@ -1,37 +1,36 @@
 ﻿#include <iostream>
+#include <cmath>
 
-void istriang(int p);
 
 int main() {
-    int p;
-    std::cin >> p;
-    istriang(p);
-
-
-}
-
-void istriang(int p) {
-    int count = 0;
-    for (int a = 1; a <= p / 3; a++) {
-        for (int b = 1; b <= (p - a)/2; b++) {
-            int c = p - a - b;
-            int a1 = a;
-            int b1 = b;
-
-            if (a * a + b * b == c * c) {
-                count++;
-
-                std::cout << a << " " << b << " " << c << std::endl;
-                break;
-
+    int n;
+    std::cin >> n;
+    int* arr = new int[n];
+    int* arr2 = new int[n];
+    for (int i = 0;i < n;++i) {
+        std::cin >> arr[i];
+    }
+    for (int i = 0;i < n;++i) {
+        int nearest;
+        i != 0 ? nearest = arr[0] : nearest = arr[1];
+        for (int j = 0;j < n;++j) {
+            if (i == j) {
+                continue;
+            }
+            if(abs(arr[i] - arr[j]) < abs(arr[i] - nearest)) {
+                nearest = arr[j];
+            }
+            else if (abs(arr[i] - arr[j]) == abs(arr[i] - nearest)) {
+                if (arr[j] > nearest) {
+                    nearest = arr[j];
+                }
             }
         }
-        if (count) {
-            break;
-        }
+        arr2[i] = nearest;
     }
-    if (count == 0) {
-        std::cout << 0 << 0 << 0;
+    for (int i = 0;i < n;++i) {
+        std::cout << arr2[i] <<'\n';
     }
-
+    delete[] arr;
+    delete[] arr2;
 }
